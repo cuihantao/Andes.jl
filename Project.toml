@@ -1,0 +1,9 @@
+name = "andes"
+uuid = "93a26e3f-343a-4ab9-b467-a68c67574964"
+authors = ["Hantao Cui <hcui7@utk.edu>"]
+version = "0.1.0"
+
+[deps]
+
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+Conda = "8f4d0f93-b110-5947-807f-2305c1781a2d"
