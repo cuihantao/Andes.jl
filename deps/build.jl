@@ -1,3 +1,3 @@
 using Conda
 
-Conda.add("andes")
+Conda.add("andes", channel="conda-forge")
