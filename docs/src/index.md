@@ -77,3 +77,10 @@ Contributions to andes.jl are welcome. Please see [CONTRIBUTING.md](https://gith
 
 andes.jl has been developed as part of the Large Scale Testbed (LTB)
 project at the Center for Ultra-Wide-Area Resilient Electric Energy Transmission Networks ([CURENT](https://curent.utk.edu/)), a National Science Foundation Engineering Research Center that is jointly supported by NSF (National Science Foundation) and the DoE (Department of Energy) of the United States. 
+
+
+```@autodocs
+Modules = [andes]
+```
+
+

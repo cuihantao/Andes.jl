@@ -1,0 +1,33 @@
+## Documentation: http://docs.travis-ci.org/user/languages/julia/
+language: julia
+os:
+  - linux
+  - osx
+  - windows
+julia:
+  - 1.3
+  - nightly
+
+## uncomment the following lines to allow failures on nightly julia
+## (tests will run but not make your overall status red)
+notifications:
+  email: false
+
+## uncomment and modify the following lines to manually install system packages
+#addons:
+#  apt: # apt-get for linux
+#    packages:
+#    - gfortran
+#before_script: # homebrew for mac
+#  - if [ $TRAVIS_OS_NAME = osx ]; then brew install gcc; fi
+
+jobs:
+  fast_finish: true
+  allow_failures:
+    - julia: nightly
+after_success: julia -e '
+  ENV["CODECOV_TOKEN"]="be10e81a-7a6b-4baa-9eba-57d9e0755cbc";
+  ODECOV_TOKEN"]="be10e81a-7a6b-4baa-9eba-57d9e0755cbc";"
+  Pkg.add("Coverage");
+  using Coverage;
+  Codecov.submit(process_folder());'
