@@ -1,6 +1,7 @@
 __precompile__()
 
 module andes
+using Conda
 using PyCall
 
 const py = PyNULL()
