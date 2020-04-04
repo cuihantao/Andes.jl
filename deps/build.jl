@@ -1,37 +1,15 @@
 using PyCall
-
-const PACKAGES = ["andes"]
-install = []
+using Conda
+import Pkg
 
 try
-    for name = PACKAGES
-        pyimport(name)
-    end
+    pyimport("andes")
 catch
-    push!(install, name)
-end
+    @warn "PyCall is not configured to an existing Python env."
+    @warn "andes.jl will use Conda for PyCall and install andes."
+    ENV["PYTHON"] = Conda.PYTHONDIR
+    Pkg.build("PyCall")
 
-if length(install) > 0
-    # import pip
-    try
-        pyimport("pip")
-    catch
-        get_pip = joinpath(dirname(@__FILE__), "get-pip.py")
-        download("https://bootstrap.pypa.io/get-pip.py", get_pip)
-        run(`$(PyCall.python) $get_pip --user`)
-    end
-
-    # install packages
-    pyimport("pip")
-    args = UTF8String[]
-    if haskey(ENV, "http_proxy")
-        push!(args, "--proxy")
-        push!(args, ENV["http_proxy"])
-    end
-    push!(args, "install")
-    push!(args, "--user")
-    append!(args, install)
-
-    pip.main(args)
+    Conda.add("andes", channel="conda-forge")
 end
 
