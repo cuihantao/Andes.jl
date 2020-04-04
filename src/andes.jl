@@ -1,15 +1,24 @@
 __precompile__()
 
 module andes
-
-# use system python
+using Pkg
+using Conda
 using PyCall
 
-# export APIs to `andes.py``
+try
+    pyimport("andes")
+catch
+    @warn "PyCall is not configured to an existing Python env."
+    @warn "andes.jl will use Conda for PyCall and install andes."
+    ENV["PYTHON"] = Conda.PYTHONDIR
+    Pkg.build("PyCall")
+    Conda.add("andes", channel="conda-forge")
+end
+
 const py = PyNULL()
 
 function __init__()
-    copy!(py, pyimport("andes"))
+    copy!(py, pyimport_conda("andes", "andes", "conda-forge"))
 end
 
 end # module
