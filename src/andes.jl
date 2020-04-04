@@ -1,6 +1,6 @@
 __precompile__()
 
-module andes
+module Andes
 using Conda
 using PyCall
 
