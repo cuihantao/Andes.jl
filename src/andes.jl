@@ -1,13 +1,15 @@
 __precompile__()
 
 module andes
-using Conda
+
+# use system python
 using PyCall
 
+# export APIs to `andes.py``
 const py = PyNULL()
 
 function __init__()
-    copy!(py, pyimport_conda("andes", "andes", "conda-forge"))
+    copy!(py, pyimport("andes"))
 end
 
 end # module
