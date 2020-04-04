@@ -17,7 +17,7 @@ Install `Andes.jl` with
 
 ```julia
 using Pkg
-Pkg.add("andes")
+Pkg.add("Andes")
 ```
 
 ### Customize Python Environment
@@ -41,7 +41,7 @@ Check out the [documentation](https://github.com/JuliaPy/PyCall.jl#specifying-th
 `Andes.jl` exposes all Python APIs under `andes.py`. Use the package with
 
 ```julia
-using andes
+using Andes
 [ Info: Precompiling andes [93a26e3f-343a-4ab9-b467-a68c67574964]
 ```
 All subsequent usages can be made to `andes.py` in the same way as in Python.
@@ -49,7 +49,7 @@ All subsequent usages can be made to `andes.py` in the same way as in Python.
 For example, to run power flow for `kundur_full.xlsx` (assume exists in the current directory), run
 
 ```julia
-julia> system = andes.py.run("kundur_full.xlsx")
+julia> system = Andes.py.run("kundur_full.xlsx")
 Parsing input file <kundur_full.xlsx>
 Input file kundur_full.xlsx parsed in 0.0768 second.
 -> Power flow calculation with Newton Raphson method:
