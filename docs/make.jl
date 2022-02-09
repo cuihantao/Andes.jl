@@ -1,6 +1,6 @@
-using Documenter, andes
+using Documenter, Andes
 
-makedocs(modules = [andes], sitename = "Andes.jl")
+makedocs(modules = [Andes], sitename = "Andes.jl")
 
 deploydocs(repo = "github.com/cuihantao/Andes.jl.git")
 

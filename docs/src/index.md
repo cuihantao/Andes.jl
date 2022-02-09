@@ -1,19 +1,19 @@
 
-# andes.jl
+# Andes.jl
 
 The Julia interface for ANDES.
 
-[![Build Status](https://img.shields.io/travis/com/cuihantao/andes.jl/master.svg)](https://travis-ci.com/cuihantao/andes.jl)
+[![Build Status](https://img.shields.io/travis/com/cuihantao/Andes.jl/master.svg)](https://travis-ci.com/cuihantao/Andes.jl)
 
 ## Introduction
 
-`andes.jl` is the Julia interface for ANDES, a power system simulation tool for symbolic modeling and numerical simulation.
+`Andes.jl` is the Julia interface for ANDES, a power system simulation tool for symbolic modeling and numerical simulation.
 
-`andes.jl` provides APIs through `PyCall` and `Conda` for calling ANDES from Julia.
+`Andes.jl` provides APIs through `PyCall` and `Conda` for calling ANDES from Julia.
 
 ## Installation
 
-Install `andes.jl` with
+Install `Andes.jl` with
 
 ```julia
 using Pkg
@@ -38,7 +38,7 @@ Check out the [documentation](https://github.com/JuliaPy/PyCall.jl#specifying-th
 
 ## Usage
 
-`andes.jl` exposes all Python APIs under `andes.py`. Use the package with
+`Andes.jl` exposes all Python APIs under `andes.py`. Use the package with
 
 ```julia
 using andes
@@ -69,14 +69,14 @@ Visit [ANDES Documentation](https://andes.readthedocs.io) for tutorial and API d
 
 ## Development
 
-Contributions to andes.jl are welcome. Please see [CONTRIBUTING.md](https://github.com/cuihantao/andes.jl/blob/master/CONTRIBUTING.md) for code contribution guidelines.
+Contributions to Andes.jl are welcome. Please see [CONTRIBUTING.md](https://github.com/cuihantao/Andes.jl/blob/master/CONTRIBUTING.md) for code contribution guidelines.
 
 ## License
 
-`andes.jl` (the ANDES Julia interface only) is released under [MIT license](https://github.com/cuihantao/andes.jl/blob/master/LICENSE). 
+`Andes.jl` (the ANDES Julia interface only) is released under [MIT license](https://github.com/cuihantao/Andes.jl/blob/master/LICENSE).
 
-andes.jl has been developed as part of the Large Scale Testbed (LTB)
-project at the Center for Ultra-Wide-Area Resilient Electric Energy Transmission Networks ([CURENT](https://curent.utk.edu/)), a National Science Foundation Engineering Research Center that is jointly supported by NSF (National Science Foundation) and the DoE (Department of Energy) of the United States. 
+Andes.jl has been developed as part of the Large Scale Testbed (LTB)
+project at the Center for Ultra-Wide-Area Resilient Electric Energy Transmission Networks ([CURENT](https://curent.utk.edu/)), a National Science Foundation Engineering Research Center that is jointly supported by NSF (National Science Foundation) and the DoE (Department of Energy) of the United States.
 
 
 ```@autodocs
