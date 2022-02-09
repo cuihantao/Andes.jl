@@ -9,13 +9,17 @@ import SparseArrays
 
 const py = PyNULL()
 
+include("kvxopt.jl")
+
 function __init__()
     copy!(py, pyimport_conda("andes", "andes", "conda-forge"))
+
+    pytype_mapping(pyimport("kvxopt").spmatrix, SparseArrays.SparseMatrixCSC)
 end
 
-include("kvxopt.jl")
 
 # --- export ---
 export convert;
 
 end # module
+

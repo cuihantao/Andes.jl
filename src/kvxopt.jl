@@ -1,10 +1,6 @@
 import Base:convert
 import SparseArrays: AbstractSparseMatrixCSC, SparseMatrixCSC
 
-using PyCall
-
-pytype_mapping(pyimport("kvxopt").spmatrix, SparseArrays.SparseMatrixCSC)
-
 
 """
 Convert Julia array to KVXOPT matrix or spmatrix
