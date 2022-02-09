@@ -80,7 +80,7 @@ project at the Center for Ultra-Wide-Area Resilient Electric Energy Transmission
 
 
 ```@autodocs
-Modules = [andes]
+Modules = [Andes]
 ```
 
 
