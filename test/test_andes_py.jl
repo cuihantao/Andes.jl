@@ -5,4 +5,8 @@ using Andes
     system = Andes.py.run(kundur, no_output=true)
 
     @test system.PFlow.converged == true
+
+    # test sparse matrix conversion
+    @test size(system.PFlow.A) == (28, 28)
+
 end
