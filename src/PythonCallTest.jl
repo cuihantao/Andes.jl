@@ -1,10 +1,10 @@
 # It appears that PythonCall and PyCall cannot co-exist in a module.
 # see https://github.com/cjdoris/PythonCall.jl/issues/140
 
-using PythonCall
 using SparseArrays
 
-import PythonCall: Py, PyList, pyconvert, pyconvert_return
+import PythonCall: Py, PyList
+import PythonCall: pyimport, pyconvert, pyconvert_return, pyconvert_add_rule
 
 """
 Convert KVXOPT.spmatrix to SparseMatrixCSC using PythonCall.
@@ -22,16 +22,14 @@ function convert_spmatrix(S, x::Py)
                             pyconvert(Vector{Int64}, PyList(x.CCS[1])) .+ 1,
                             pyconvert(Vector{ComplexF64}, PyList(x.CCS[2])))::SparseMatrixCSC{ComplexF64,ComplexF64}
     end
-    return PythonCall.pyconvert_return(S)
+    return pyconvert_return(S)
 end
 
-pc = PythonCall.pyimport("andes")
-ss = pc.run(pc.get_case("kundur/kundur_full.xlsx"))
+pc = pyimport("andes")
+ss = pc.run(pc.get_case("kundur/kundur_full.xlsx"), no_output=true)
 
-aa = 1
+convert_spmatrix(Any, ss.dae.gy)
 
-convert_spmatrix(1, ss.dae.gy)
+pyconvert_add_rule("kvxopt.base:spmatrix", SparseMatrixCSC, convert_spmatrix)
 
-PythonCall.pyconvert_add_rule("kvxopt:spmatrix", SparseMatrixCSC, convert_spmatrix)
-
-pyconvert(SparseMatrixCSC, ss.dae.gy)
+@time pyconvert(SparseMatrixCSC, ss.dae.gy)
