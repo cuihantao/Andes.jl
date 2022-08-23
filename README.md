@@ -1,7 +1,7 @@
 
 # Andes.jl
 
-The Julia interface for ANDES.
+The Julia interface to [ANDES](https://github.com/cuihantao/andes).
 
 [![Build Status](https://img.shields.io/travis/com/cuihantao/Andes.jl/master.svg)](https://travis-ci.com/cuihantao/Andes.jl)
 
