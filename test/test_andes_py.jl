@@ -7,6 +7,6 @@ using Andes
     @test system.PFlow.converged == true
 
     # test sparse matrix conversion
-    @test size(system.PFlow.A) == (28, 28)
+    @test size(system.PFlow.A) == (25, 25)
 
 end
