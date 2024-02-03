@@ -2,24 +2,19 @@ __precompile__()
 
 module Andes
 
-using Conda
-using PyCall
+using PythonCall
 
-import SparseArrays
+const py = PythonCall.pynew()
 
-const py = PyNULL()
-
-include("kvxopt.jl")
+include("kvxopt_pythoncall.jl")
 
 function __init__()
-    copy!(py, pyimport_conda("andes", "andes", "conda-forge"))
+    PythonCall.pycopy!(py, pyimport("andes"))
 
-    pytype_mapping(pyimport("kvxopt").spmatrix, SparseArrays.SparseMatrixCSC)
+    PythonCall.pyconvert_add_rule("kvxopt.base:spmatrix",
+        AbstractSparseMatrixCSC,
+        spmatrix_to_julia,
+    )
 end
 
-
-# --- export ---
-export convert;
-
-end # module
-
+end
