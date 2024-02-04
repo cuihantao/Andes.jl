@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - '1.8'
+          - '1.10'
           - 'nightly'
         os:
           - ubuntu-latest
@@ -33,28 +33,6 @@ jobs:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
       - uses: julia-actions/cache@v1
-      - name: Fix weird Conda.jl/PyCall.jl build error
-        env:
-          PYTHON: ""
-        shell: julia --color=yes {0}
-        run: |
-          using Pkg
-          try
-            Pkg.instantiate()
-            println("Successfully instantiated the test environment")
-          catch e
-            display(e)
-          end
-          ENV["PYTHON"] = ""
-          Pkg.add("Conda")
-          println("Try building Conda and PyCall")
-          try
-            Pkg.build("Conda")
-            using Conda
-            println("Successfully built Conda")
-          catch e
-            display(e)
-          end
       - uses: julia-actions/julia-buildpkg@v1
         env:
           PYTHON: ""  # for conda packages
