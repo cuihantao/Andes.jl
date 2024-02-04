@@ -1,7 +1,7 @@
 name = "Andes"
 uuid = "93a26e3f-343a-4ab9-b467-a68c67574964"
 authors = ["Hantao Cui <hcui7@utk.edu>"]
-version = "0.1.2"
+version = "0.2.0"
 
 [deps]
 CondaPkg = "992eb4ea-22a4-4c89-a5bb-47a3300528ab"

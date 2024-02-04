@@ -1,13 +1,13 @@
 
 # Andes.jl
 
-The Julia interface for ANDES.
+The Julia API for [ANDES](https://github.com/cuihantao/andes).
 
 [![Build Status](https://img.shields.io/travis/com/cuihantao/Andes.jl/master.svg)](https://travis-ci.com/cuihantao/Andes.jl)
 
 ## Introduction
 
-`Andes.jl` is the Julia interface for ANDES, a power system simulation tool for symbolic modeling and numerical simulation.
+`Andes.jl` is the Julia API for ANDES, a power system simulation tool for symbolic modeling and numerical simulation.
 
 `Andes.jl` provides APIs through `PyCall` and `Conda` for calling ANDES from Julia.
 

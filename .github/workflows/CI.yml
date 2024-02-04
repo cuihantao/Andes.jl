@@ -1,0 +1,84 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+    tags: '*'
+  pull_request:
+concurrency:
+  # Skip intermediate builds: always.
+  # Cancel intermediate builds: only if it is a pull request build.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+jobs:
+  test:
+    name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }} - ${{ github.event_name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - '1.8'
+          - 'nightly'
+        os:
+          - ubuntu-latest
+        arch:
+          - x64
+    env:
+      PYTHON: ""  # for conda packages
+    steps:
+      - uses: actions/checkout@v2
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: ${{ matrix.version }}
+          arch: ${{ matrix.arch }}
+      - uses: julia-actions/cache@v1
+      - name: Fix weird Conda.jl/PyCall.jl build error
+        env:
+          PYTHON: ""
+        shell: julia --color=yes {0}
+        run: |
+          using Pkg
+          try
+            Pkg.instantiate()
+            println("Successfully instantiated the test environment")
+          catch e
+            display(e)
+          end
+          ENV["PYTHON"] = ""
+          Pkg.add("Conda")
+          println("Try building Conda and PyCall")
+          try
+            Pkg.build("Conda")
+            using Conda
+            println("Successfully built Conda")
+          catch e
+            display(e)
+          end
+      - uses: julia-actions/julia-buildpkg@v1
+        env:
+          PYTHON: ""  # for conda packages
+      - uses: julia-actions/julia-runtest@v1
+      - uses: julia-actions/julia-processcoverage@v1
+      - uses: codecov/codecov-action@v2
+        with:
+          files: lcov.info
+  docs:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: '1'
+      - uses: julia-actions/julia-buildpkg@v1
+      - uses: julia-actions/julia-docdeploy@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
+      - run: |
+          julia --project=docs -e '
+            using Documenter: DocMeta, doctest
+            using Andes
+            DocMeta.setdocmeta!(Andes, :DocTestSetup, :(using Andes); recursive=true)
+            doctest(Andes)'
