@@ -17,4 +17,6 @@ function __init__()
     )
 end
 
+export pyconvert, pytype
+
 end
